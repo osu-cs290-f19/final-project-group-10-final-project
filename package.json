@@ -1,12 +1,13 @@
 {
   "name": "final-project-group-10",
   "version": "1.0.0",
-  "description": "Final Project for CS290 at Oregon State University",
+  "description": "Group 10 Final Project for CS290 at Oregon State University",
   "main": "client.js",
   "scripts": {
     "test": "\"echo \\\"Error: no test specified\\\" && exit 1\"",
     "start": "node server.js",
-    "build": "handlebars -f pages/NoteTemplate.js views/partials/NoteTemplate.handlebars",
+    "dev": "nodemon server.js",
+    "build": "handlebars -f pages/NoteTemplate.js views/partials/NoteTemplate.handlebars && handlebars -f pages/ClassTemplate.js views/partials/ClassTemplate.handlebars && handlebars -f pages/ClassPageTemplate.js views/ClassPageTemplate.handlebars && handlebars -f pages/NotePageTemplate.js views/NotePageTemplate.handlebars && handlebars -f pages/main.js views/layouts/main.handlebars && handlebars -f pages/404.js views/404.handlebars && handlebars -f pages/HomePage.js views/HomePage.handlebars",
     "prestart": "npm run build"
   },
   "repository": {
@@ -24,5 +25,8 @@
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
     "handlebars": "^4.5.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.1"
   }
 }
