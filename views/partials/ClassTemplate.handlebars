@@ -1,11 +1,13 @@
 /* Potential layout for class template */
-/*will be used in homepage*/
+/*will be used in homepage and in side nav bar on other pages*/
 
-<div class="class-name">
-{{ClassName}}
-</div>
-<div class="Note-Container">
-  {{#each NoteList}}
-    {{> NoteTemplate}}
-  {{/each}}
+<div class="class-container" data-classname="{{ClassName}}">
+  <div class="class-name">
+    {{ClassName}}
+  </div>
+  <div class="Note-Container">
+    {{#each NoteList}}
+      {{> NoteTemplate}}
+    {{/each}}
+  </div>
 </div>
