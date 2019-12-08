@@ -7,7 +7,7 @@
     "test": "\"echo \\\"Error: no test specified\\\" && exit 1\"",
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "build": "handlebars -f pages/NoteTemplate.js views/partials/NoteTemplate.handlebars && handlebars -f pages/ClassTemplate.js views/partials/ClassTemplate.handlebars && handlebars -f pages/ClassPageTemplate.js views/ClassPageTemplate.handlebars && handlebars -f pages/NotePageTemplate.js views/NotePageTemplate.handlebars && handlebars -f pages/main.js views/layouts/main.handlebars && handlebars -f pages/404.js views/404.handlebars && handlebars -f pages/HomePage.js views/HomePage.handlebars",
+    "build": "handlebars -f pages/NoteTemplate.js views/partials/NoteTemplate.handlebars && handlebars -f pages/ClassTemplate.js views/partials/ClassTemplate.handlebars && handlebars -f pages/ClassPageTemplate.js views/ClassPageTemplate.handlebars && handlebars -f pages/NotePageTemplate.js views/NotePageTemplate.handlebars && handlebars -f pages/main.js views/layouts/main.handlebars && handlebars -f pages/404.js views/404.handlebars && handlebars -f pages/HomePage.js views/HomePage.handlebars && handlebars -f pages/NavBarTemplate.js views/partials/NavBarTemplate.handlebars",
     "prestart": "npm run build"
   },
   "repository": {
