@@ -74,29 +74,49 @@ function handleNewNoteOKButtonClick(event){
 		alert("An error has occured (THIS SHOULD NOT HAPPEN!)");
 	}
 	else{
-		var classContainers = document.getElementsByClassName("class-container");
-		var classContainer = false;
-		for(var i=0;i<classContainers.length;i++){
-			if(classContainers[i].getAttribute("data-classname") == document.getElementById("new-note-modal").getAttribute("data-classname")){
-				classContainer = classContainers[i];
-				break;
+		var postRequest = new XMLHttpRequest();
+		var requestURL = '/' + "<ClassName Variable>" + '/addNote';
+		postRequest.open('POST', requestURL);
+
+		var requestBody = JSON.stringify({
+			class : <ClassName Variable>,
+			title : <NoteTitle Variable>
+		});
+
+		postRequest.setRequestHeader('Content-Type', 'application/json');
+
+		postRequest.addEventListener('load', function(event){
+			if (event.target.status !== 200) {
+				var responseBody = event.target.response;
+				alert("Error adding note on server side: " + responseBody);
 			}
-		}
-		if(classContainer){
-			var noteTemplate = Handlebars.templates.NoteTemplate;
-			var newNoteHTML = noteTemplate({
-				title: newNoteTitle,
-				classname: newNoteClass,
-				created: newNoteDate,
-				content: newNoteContent
-			});
-			classContainer.insertAdjacentHTML('beforeend', newNoteHTML);
-			document.getElementById("new-note-modal").style.display = "none";
-			document.getElementById("new-note-title-input").value = "";
-		}
-		else{
-			alert("This class does not exist (THIS SHOULD NOT HAPPEN!)");
-		}
+			else{
+				var classContainers = document.getElementsByClassName("class-container");
+				var classContainer = false;
+				for(var i=0;i<classContainers.length;i++){
+					if(classContainers[i].getAttribute("data-classname") == document.getElementById("new-note-modal").getAttribute("data-classname")){
+						classContainer = classContainers[i];
+						break;
+					}
+				}
+				if(classContainer){
+					var noteTemplate = Handlebars.templates.NoteTemplate;
+					var newNoteHTML = noteTemplate({
+						title: newNoteTitle,
+						classname: newNoteClass,
+						created: newNoteDate,
+						content: newNoteContent
+					});
+					classContainer.insertAdjacentHTML('beforeend', newNoteHTML);
+					document.getElementById("new-note-modal").style.display = "none";
+					document.getElementById("new-note-title-input").value = "";
+				}
+				else{
+					alert("This class does not exist (THIS SHOULD NOT HAPPEN!)");
+				}
+			}
+		})
+		postRequest.send(requestBody);
 	}
 }
 
@@ -136,12 +156,32 @@ function handleNewClassOKButtonClick(event){
 		alert("You must enter a title!");
 	}
 	else{
-		var ClassTemplate = Handlebars.templates.ClassTemplate;
-		var newClassHTML = ClassTemplate({
-			ClassName: newClassClass,
-			NoteList: []
+		var postRequest = new XMLHttpRequest();
+		var requestURL = '/addClass';
+		postRequest.open('POST', requestURL);
+
+		var requestBody = JSON.stringify({
+			class : <ClassName Variable>
 		});
-		document.body.insertAdjacentHTML('beforeend', newClassHTML);
+
+		postRequest.setRequestHeader('Content-Type', 'application/json');
+
+		postRequest.addEventListener('load', function(event){
+			if (event.target.status !== 200) {
+				var responseBody = event.target.response;
+				alert("Error adding class on server side: " + responseBody);
+			}
+			else{
+				var ClassTemplate = Handlebars.templates.ClassTemplate;
+				var newClassHTML = ClassTemplate({
+					ClassName: newClassClass,
+					NoteList: []
+				});
+				document.body.insertAdjacentHTML('beforeend', newClassHTML);
+			}
+		})
+		postRequest.send(requestBody);		
+		
 		document.getElementById("new-Class-modal").style.display = "none";
 		document.getElementById("new-Class-title-input").value = "";
 	}
