@@ -25,9 +25,6 @@ app.use(express.static('pages'));
 //load data from JSON File
 var Data = require("./Data.json");
 
-var noteArrayLabels = Data.NoteData["Web-Development"].Notes.map(function(a) {return a.title;});
-console.log(result);
-
 //logger function
 function logger(req, res, next){
 	console.log('++ Got a Request ++');
@@ -128,11 +125,13 @@ app.post('/:class/addNote', function(req, res, next){
 	var className = req.params.class; //get name of the class
 	var noteName = req.body.title; //get note
 
-	if(Data.ClassList.indexOf(className) != 1){ //className identifies a pre existing class
+	if(className){ //if class name is provided
+		if(Data.ClassList.indexOf(className) != 1){ //className identifies a pre existing class
 
+		}
 	}
 	else{
-		next();
+		res.status(400).send('Request is for a note that does not exist. Delete did not occur');
 	}
 })
 

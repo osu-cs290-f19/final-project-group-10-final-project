@@ -1,13 +1,14 @@
-/* Potential layout for class template */
-/*will be used in homepage and in side nav bar on other pages*/
 
 <div class="class-container" data-classname="{{ClassName}}">
-  <div class="class-name">
-    {{ClassName}}
+  <div class="class-container-header">
+    <button id="dropdown" onclick="window.location.href = 'http://localhost:3000/{{ClassName}}';"> {{ClassName}} </button>
   </div>
   <div class="Note-Container">
-    {{#each NoteList}}
-      {{> NoteTemplate}}
-    {{/each}}
+      {{#each NoteList}}
+        {{> NoteTemplate}}
+      {{/each}}
+  </div>
+  <div class="new-note-button">
+    <button id="new-note"></button>
   </div>
 </div>
