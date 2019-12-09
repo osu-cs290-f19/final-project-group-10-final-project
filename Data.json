@@ -5,14 +5,14 @@
       "Notes" : [
           {
             "title" : "Using-Express",
-            "class" : "CS 290 - Web Development",
+            "class" : "Web-Development",
             "created" : "12-04-2019",
             "modified" : "12-05-2019",
             "content" : "These are notes on using express."
           },
           {
             "title" : "Node.js",
-            "class" : "CS 290 - Web Development",
+            "class" : "Web-Development",
             "created" : "12-06-2019",
             "modified" : "12-06-2019",
             "content" : "These are notes about Node.js"
@@ -23,7 +23,7 @@
       "Notes" : [
         {
           "title" : "Chain-Rule",
-          "class" : "MTH 251 - Differential Calculus",
+          "class" : "Differential-Calculus",
           "created" : "12-04-2019",
           "modified" : "12-05-2019",
           "content" : "This is how you do chain rule."
