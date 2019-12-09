@@ -24,6 +24,10 @@ app.use(express.static('pages'));
 
 //load data from JSON File
 var Data = require("./Data.json");
+console.log(Data);
+//keep list of class names
+var ClassList = ['Web-Development', 'Diffrential-Calculus'];
+console.log(ClassList);
 
 //logger function
 function logger(req, res, next){
@@ -42,7 +46,7 @@ app.use(logger);
 //request for homepage - should render page will all course listed + Notes in drop down menus
 app.get('/', function(req, res, next){
 	res.status(200).render('HomePage', {
-
+		ClassList : Data
 	});
 })
 
@@ -50,15 +54,15 @@ app.get('/', function(req, res, next){
 app.post('/addClass', function(req, res, next){
 	var className = req.body.class; //get name of the class
 
-	if(Data.ClassList.indexOf(className) != -1){ //if class already exists, dont create new class
+	if(ClassList.indexOf(className) != -1){ //if class already exists, dont create new class
 		res.status(400).send('Class already exists, new class not created.');
 		next();
 	}
 	else if(className){ //
-		//Add new class to Data.ClassList
-		Data.ClassList.push(className);
+		//Add new class to ClassList
+		ClassList.push(className);
 		//Create new note section in Data.NoteData
-		Data.NoteData.className = {"Notes" : []};
+		Data.className = {"Notes" : []};
 
 		//update "Server"
 		fs.writeFile(
@@ -81,11 +85,11 @@ app.post('/addClass', function(req, res, next){
 //post request to delete a class from the homepage
 app.post('/deleteClass', function(req, res, next){
 	var className = req.body.class; //get name of the class
-	if(Data.ClassList.indexOf(className) != 1){ //className identifies a pre existing class
-		//remove class name from Data.ClassList
-		Data.ClassList.splice(Data.ClassList.indexOf(className), 1);
+	if(ClassList.indexOf(className) != 1){ //className identifies a pre existing class
+		//remove class name from ClassList
+		ClassList.splice(ClassList.indexOf(className), 1);
 		//remove notes from Data.NoteData
-		delete Data.NoteData.className;
+		delete Data.className;
 
 		//update "Server"
 		fs.writeFile(
@@ -108,11 +112,11 @@ app.post('/deleteClass', function(req, res, next){
 //Requests for a particular class pages
 app.get('/:class', function(req, res, next){
 	var className = req.params.class; //get name of class page requested
-	if(Data.ClassList.indexOf(className) != -1){ //class is valid
+	if(ClassList.indexOf(className) != -1){ //class is valid
 		res.status(200).render('ClassPageTemplate', {
 			//will need to link data in ClassPageTemplate to Data.NoteData[className].Notes
 			ClassName : className,
-			NoteList : Data.NoteData[className].Notes
+			NoteList : Data.className.Notes
 		});
 	}
 	else{
@@ -126,7 +130,7 @@ app.post('/:class/addNote', function(req, res, next){
 	var noteName = req.body.title; //get note
 
 	if(className){ //if class name is provided
-		if(Data.ClassList.indexOf(className) != 1){ //className identifies a pre existing class
+		if(ClassList.indexOf(className) != 1){ //className identifies a pre existing class
 
 		}
 	}
@@ -140,7 +144,7 @@ app.post('/:class/deleteNote', function(req, res, next){
 	var className = req.params.class; //get name of the class
 	var noteName = req.body.title; //get note
 
-	if(Data.ClassList.indexOf(className) != 1){ //className identifies a pre existing class
+	if(ClassList.indexOf(className) != 1){ //className identifies a pre existing class
 		if(Data.NoteData[className].Notes.indexOf(noteName) != -1){ //noteName identifies an existing note
 			var noteArrayLabels = Data.NoteData["Web-Development"].Notes.map(function(a) {return a.title;});
 			var indexToRemove = noteArrayLabels.indexOf(noteName);
@@ -176,7 +180,7 @@ app.get('/:class/:note', function(req, res, next){
 	var noteName = req.params.note; //get name of note requested
 	console.log(className, " : ", noteName);
 
-	if(Data.ClassList.indexOf(className) != -1){ //class is valid
+	if(ClassList.indexOf(className) != -1){ //class is valid
 		var classNotes = Data.NoteData[className].Notes; //get the notes for that class
 		for(var i = 0; i < classNotes.length; i++){ //iterate through the notes for the class
 			if(classNotes[i].title === noteName){ //check if note names match

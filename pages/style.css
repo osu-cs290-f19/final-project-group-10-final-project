@@ -1,33 +1,207 @@
 header {
-  background-color: #000;
+  background-color: #17252A;
   display: flex;
-  align-items: center;
-  position: relative;
+  width: auto;
+  padding: 20px;
 }
 
 .site-title {
-  font-family: "Roboto Slab", serif;
-  font-size: 80px;
+  font-family: "Arial";
+  color: #fff;
+  font-size: 70px;
   font-weight: 100;
+  margin: 0 auto;
 }
 
-.content {
-  display: flex;
-}
 
 body {
-  font-family: 'Roboto', sans-serif;
-  margin: 0;
+  font-family: "Arial";
+  font-size: 10px;
 }
 
-.note-category {
-    background-color: #000;
+h1 {
+  font-family: "Arial";
+  font-size: 30px;
+}
+
+h2 {
+  font-family: "Arial";
+  font-size: 25px;
+}
+
+h3 {
+  font-family: "Arial";
+  font-size: 20px;
+}
+
+p {
+  font-family: "Arial";
+  font-size: 20px;
+}
+
+.class-folder {
+  background-color: #2B7A78;
+  color: white;
+  width: auto;
+  margin: 20px;
+  padding: 10px;
 }
 
 .note {
-
+  background-color: #3AAFA9;
+  color: white;
+  width: auto;
+  margin: 20px;
+  margin-left: 70px;
+  padding: 10px;
 }
 
-.add-note {
+.note-info {
+  text-align: right;
+  margin-top: 10px;
+  margin-right: -85px;
+  float: right;
+}
+.button {
+  background-color: gray;
+  border-color: black;
+  float: right;
+}
 
+#add-note {
+  background-color: #17252A;
+  color: white;
+  width: 500px;
+  cursor: pointer;
+  margin-left: 70px;
+  padding: 1px 10px;
+}
+
+.add-note:hover {
+  background-color: gray;
+}
+
+
+/* MODAL */
+.modal-header {
+  padding: 2px 16px;
+  height: 70px;
+  background-color: #17252A;
+  color: white;
+  text-align: center;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: white;
+  margin: 10% auto;
+  padding: 20px;
+  width: 20%;
+  height: 40%;
+}
+
+label {
+  margin: 10px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.post-input-element {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  margin: 10px;
+}
+
+#add-class {
+  background-color: #17252A;
+  color: white;
+  width: 500px;
+  cursor: pointer;
+  margin: 0 0 0 20px;
+}
+
+.sidenav {
+  height: 500px; /* Full-height: remove this if you want "auto" height */
+  width: 160px; /* Set the width of the sidebar */
+  left: 0;
+  border: 1px solid gray; /* Black */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  margin: 20px;
+  padding: 10px 20px 10px 10px;
+  text-align: center;
+  float: left;
+}
+
+.sidenav-class {
+  height: 50px;
+  width: 100%;
+  background-color: #2B7A78;
+  margin: 10px;
+}
+
+.sidenav-note {
+  height: 50px;
+  width: 80%;
+  background-color: #3AAFA9;
+  margin: 10px 0px 10px 50px;
+  padding-right: -10px;
+  text-align: center;
+}
+/* The navigation menu links */
+.sidenav a {
+  padding: 6px 0 6px 0;
+  text-decoration: none;
+  font-size: 25px;
+  color: white;
+  display: block;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: white;
+}
+
+textarea {
+  margin: 20px;
+  padding: 10px;
+  float: left;
+}
+
+.date-title {
+  font-family: "Arial";
+  color: #fff;
+  text-align: right;
+  float: left;
+  margin-left: 50px;
+}
+
+.title {
+  font-family: "Arial";
+  color: #fff;
+  margin-left: 100px;
+  margin-top: -25px;
 }
