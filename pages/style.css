@@ -1,0 +1,33 @@
+header {
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.site-title {
+  font-family: "Roboto Slab", serif;
+  font-size: 80px;
+  font-weight: 100;
+}
+
+.content {
+  display: flex;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+}
+
+.note-category {
+    background-color: #000;
+}
+
+.note {
+
+}
+
+.add-note {
+
+}
