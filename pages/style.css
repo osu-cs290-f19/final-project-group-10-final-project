@@ -1,5 +1,5 @@
 header {
-  background-color: gray;
+  background-color: #17252A;
   display: flex;
   width: auto;
   padding: 20px;
@@ -40,7 +40,7 @@ p {
 }
 
 .class-folder {
-  background-color: #000;
+  background-color: #2B7A78;
   color: white;
   width: auto;
   margin: 20px;
@@ -48,14 +48,20 @@ p {
 }
 
 .note {
-  background-color: gray;
+  background-color: #3AAFA9;
   color: white;
   width: auto;
   margin: 20px;
   margin-left: 70px;
-  padding: 1px 10px;
+  padding: 10px;
 }
 
+.note-info {
+  text-align: right;
+  margin-top: 10px;
+  margin-right: -85px;
+  float: right;
+}
 .button {
   background-color: gray;
   border-color: black;
@@ -63,7 +69,7 @@ p {
 }
 
 #add-note {
-  background-color: #000;
+  background-color: #17252A;
   color: white;
   width: 500px;
   cursor: pointer;
@@ -131,7 +137,7 @@ label {
 }
 
 #add-class {
-  background-color: #000;
+  background-color: #17252A;
   color: white;
   width: 500px;
   cursor: pointer;
@@ -142,10 +148,10 @@ label {
   height: 500px; /* Full-height: remove this if you want "auto" height */
   width: 160px; /* Set the width of the sidebar */
   left: 0;
-  background-color: white; /* Black */
+  border: 1px solid gray; /* Black */
   overflow-x: hidden; /* Disable horizontal scroll */
   margin: 20px;
-  padding: 10px;
+  padding: 10px 20px 10px 10px;
   text-align: center;
   float: left;
 }
@@ -153,20 +159,21 @@ label {
 .sidenav-class {
   height: 50px;
   width: 100%;
-  background-color: black;
+  background-color: #2B7A78;
   margin: 10px;
 }
 
 .sidenav-note {
   height: 50px;
   width: 80%;
-  background-color: gray;
-  margin: 10px 0 10px 50px;
+  background-color: #3AAFA9;
+  margin: 10px 0px 10px 50px;
+  padding-right: -10px;
   text-align: center;
 }
 /* The navigation menu links */
 .sidenav a {
-  padding: 6px 8px 6px 16px;
+  padding: 6px 0 6px 0;
   text-decoration: none;
   font-size: 25px;
   color: white;
@@ -175,15 +182,13 @@ label {
 
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover {
-  color: gray;
+  color: white;
 }
 
 textarea {
   margin: 20px;
   padding: 10px;
-  height: 500px;
-  width: 1125px;
-  float: right;
+  float: left;
 }
 
 .date-title {
