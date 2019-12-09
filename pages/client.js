@@ -1,4 +1,4 @@
-var noteCategories = document.getElementsByClassName("class-container-header");
+var noteCategories = document.getElementsByClassName("dropdown");
 for (var i = 0; i < noteCategories.length; i++) {
 	noteCategories[i].addEventListener('click', handleNoteContainerHeaderClick)
 }
@@ -6,7 +6,7 @@ for (var i = 0; i < noteCategories.length; i++) {
 function handleNoteContainerHeaderClick(event){	
 	var actionButton = event.currentTarget;
 	var clickedElem = event.target;
-	var classContainer = clickedElem.parentNode;
+	var classContainer = clickedElem.parentNode.parentNode;
 	var parentChildren = classContainer.children;
 	var noteContainerContent = false;
 	var j = 0;
