@@ -86,7 +86,7 @@ p {
 .modal-header {
   padding: 2px 16px;
   height: 70px;
-  background-color: gray;
+  background-color: #17252A;
   color: white;
   text-align: center;
 }
@@ -107,8 +107,8 @@ p {
   background-color: white;
   margin: 10% auto;
   padding: 20px;
-  width: 40%;
-  height: 50%;
+  width: 20%;
+  height: 40%;
 }
 
 label {
@@ -124,7 +124,7 @@ label {
 
 .close:hover,
 .close:focus {
-  color: black;
+  color: white;
   text-decoration: none;
   cursor: pointer;
 }
@@ -203,4 +203,5 @@ textarea {
   font-family: "Arial";
   color: #fff;
   margin-left: 100px;
+  margin-top: -25px;
 }
