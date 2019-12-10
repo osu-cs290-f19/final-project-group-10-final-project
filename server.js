@@ -32,16 +32,18 @@ app.use(express.static('pages'));
 
 //load data from JSON File
 var Data = require("./Data.json");
-console.log(Data);
 //keep list of class names
 var ClassList = Data.map(function(a){return a.ClassName});
+console.log(Data);
 console.log(ClassList);
 
 //logger function
 function logger(req, res, next){
 	console.log('++ Got a Request ++');
 	console.log('  -- URL:', req.url);
-	console.log('  -- Mehtod:', req.method);
+	console.log('  -- Method:', req.method);
+	console.log(Data);
+	console.log(ClassList);
 
 	next();
 }
@@ -96,29 +98,49 @@ app.post('/addClass', function(req, res, next){
 //post request to delete a class from the homepage
 app.post('/deleteClass', function(req, res, next){
 	var className = req.body.class; //get name of the class
-	if(ClassList.indexOf(className) != 1){ //className identifies a pre existing class
-		//remove class name from ClassList
-		var loc = ClassList.indexOf(className);
-		ClassList.splice(loc,1);
-		Data.splice(loc,1);
 
-		//update "Server"
-		fs.writeFile(
-			__dirname + '/Data.json',
-			JSON.stringify(Data),
-			function (err) {
-        if (!err) {
-          res.status(200).send();
-        } else {
-          res.status(500).send("Failed to write data on server side.");
-        }
-      }
-		);
+	if(className){ //valid data sent from client
+		if(ClassList.indexOf(className)){ //in ClassList
+			var index = ClassList.indexOf(className);
+			ClassList.splice(index);
+			Data.splice(index);
+		}
+		else{
+			res.status(400).send('Class you are trying to delete does not exist.')
+		}
 	}
-	else{
+	else {
 		next();
 	}
 })
+
+/*
+
+if(ClassList.indexOf(className) != 1){ //className identifies a pre existing class
+	//remove class name from ClassList
+	var loc = ClassList.indexOf(className);
+	ClassList.splice(loc,1);
+	Data.splice(loc,1);
+
+	//update "Server"
+	fs.writeFile(
+		__dirname + '/Data.json',
+		JSON.stringify(Data),
+		function (err) {
+			if (!err) {
+				res.status(200).send();
+			} else {
+				res.status(500).send("Failed to write data on server side.");
+			}
+		}
+	);
+}
+else{
+	next();
+}
+
+*/
+
 
 //Requests for a particular class pages
 app.get('/:class', function(req, res, next){
@@ -146,9 +168,8 @@ app.post('/addNote', function(req, res, next){
 
 	if(className && noteName){ //if class name and note name is provided
 			//update class liste
-			ClassList.push(className);
 			var itemIndex = ClassList.indexOf(className);
-
+			console.log('ItemIndex:', itemIndex);
 			//update Data
 			Data[itemIndex].Notes.push({
 					"title" : noteName,

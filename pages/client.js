@@ -225,7 +225,7 @@ function handleNewClassOKButtonClick(event){
 		postRequest.open('POST', requestURL);
 
 		var requestBody = JSON.stringify({
-			class : newClassTitle
+			class : newClassTitle.replace(' ', '-')
 		});
 
 		postRequest.setRequestHeader('Content-Type', 'application/json');
@@ -294,6 +294,7 @@ function handleDeleteClassButtonClick(event){
 	  }
 	})
 	postRequest.send(requestBody);
+	location.reload();
 }
 
 //Code to delete a Note
@@ -383,7 +384,7 @@ function saveNoteContents(event){
 	    var responseBody = event.target.response;
 	    alert("Error Saving note on server side: " + responseBody);
 	  } else {
-	    console.log('Save Successful.');
+	   alert('Save Successful.');
 	  }
 	})
 	postRequest.send(requestBody);
