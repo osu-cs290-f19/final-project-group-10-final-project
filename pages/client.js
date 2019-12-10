@@ -7,6 +7,10 @@ function handleNoteContainerHeaderClick(event){
 	var actionButton = event.currentTarget;
 	var clickedElem = event.target;
 	var classContainer = clickedElem.parentNode.parentNode.parentNode;
+<<<<<<< HEAD
+=======
+	var classContainer = clickedElem.parentNode.parentNode;
+>>>>>>> 5316c8a5d8a454ee5a331c0549f08c9356bc13be
 	var parentChildren = classContainer.children;
 
 	var noteContainerContent = [];
@@ -256,8 +260,11 @@ function handleNewClassOKButtonClick(event){
 
 
 //Code to delete a Class
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 5316c8a5d8a454ee5a331c0549f08c9356bc13be
 
 //add event listeners to delete-class buttons
 var deleteClassButtonListeners = document.getElementsByClassName("delete-class");
@@ -271,6 +278,7 @@ function handleDeleteClassButtonClick(event){
 	var clickedElem = event.target;
 	var classContainer = clickedElem.parentNode.parentNode;
 	var classContainerItems = classContainer.children;
+<<<<<<< HEAD
 
 	var nameOfClass = classContainer.getAttribute('data-classname');
 
@@ -389,4 +397,32 @@ function saveNoteContents(event){
 	  }
 	})
 	postRequest.send(requestBody);
+=======
+	for(var i=0;i<classContainerItems.length;i++){
+		classContainer.removeChild(classContainerItems[i]);
+	}
+}
+
+
+//Code to delete a Note
+
+//add event listeners to delete-note buttons
+var deleteNoteButtonListeners = document.getElementsByNoteName("delete-note-button");
+for(var i = 0; i < deleteNoteButtonListeners.length; i++){
+	deleteNoteButtonListeners[i].addEventListener('click', handleDeleteNoteButtonClick);
+}
+
+// function to delete a given note from the website
+function handleDeleteNoteButtonClick(event){
+	var actionButton = event.currentTarget;
+	var clickedElem = event.target;
+	var noteItem = clickedElem.parentNode;
+	var noteContainer = clickedElem.parentNode.parentNode;
+	var noteContainerItems = noteContainer.children;
+	for(var i=0;i<noteContainerItems.length;i++){
+		if(noteContainerItems[i] == noteItem){
+			noteContainer.removeChild(noteContainerItems[i]);
+		}
+	}
+>>>>>>> 5316c8a5d8a454ee5a331c0549f08c9356bc13be
 }
