@@ -1,17 +1,18 @@
 
 <div class="class-container" data-classname="{{ClassName}}">
   <div class="class-container-header">
-    <button class="dropdown"><h1> {{ClassName}} </a></h1>  </button>
+    <button class="dropdown"><h1> {{ClassName}}</h1> <i style='font-size:33px' class='fas'>&#xf103;</i></button>
     <button class="delete-class"> X </button>
   </div>
 
     <ul class="Note-Container" style="display:none;">
       {{#each Notes}}
-          <li class="Note-List-Item" data-notename={{title}}>
+          <li class="Note-List-Item" data-notename={{title}} data-classname="{{classname}}">
             <a href="http://localhost:3000/{{classname}}/{{title}}">{{title}}</a>
+            <button class="delete-note-button">X</button>
           </li>
       {{/each}}
     </ul>
 
-  {{> AddNoteButtonTemplate}}
+  <button class="new-note-button" style="display:none;"><h3>Add Note</h3></button>
 </div>

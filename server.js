@@ -34,7 +34,7 @@ app.use(express.static('pages'));
 var Data = require("./Data.json");
 console.log(Data);
 //keep list of class names
-var ClassList = ['Web-Development', 'Differential-Calculus'];
+var ClassList = Data.map(function(a){return a.ClassName});
 console.log(ClassList);
 
 //logger function
@@ -98,9 +98,9 @@ app.post('/deleteClass', function(req, res, next){
 	var className = req.body.class; //get name of the class
 	if(ClassList.indexOf(className) != 1){ //className identifies a pre existing class
 		//remove class name from ClassList
-		ClassList.splice(ClassList.indexOf(className), 1);
-		//remove notes from Data.NoteData
-		delete Data.className;
+		var loc = ClassList.indexOf(className);
+		ClassList.splice(loc,1);
+		Data.splice(loc,1);
 
 		//update "Server"
 		fs.writeFile(
@@ -140,8 +140,8 @@ app.get('/:class', function(req, res, next){
 })
 
 //post request to add a new note to a class
-app.post('/:class/addNote', function(req, res, next){
-	var className = req.params.class; //get name of the class
+app.post('/addNote', function(req, res, next){
+	var className = req.body.class; //get name of the class
 	var noteName = req.body.title; //get note
 
 	if(className && noteName){ //if class name and note name is provided
@@ -176,16 +176,18 @@ app.post('/:class/addNote', function(req, res, next){
 })
 
 //post request to delete a new note to a class
-app.post('/:class/deleteNote', function(req, res, next){
-	var className = req.params.class; //get name of the class
+app.post('/deleteNote', function(req, res, next){
+	var className = req.body.class; //get name of the class
 	var noteName = req.body.title; //get note
 
-	if(ClassList.indexOf(className) != 1){ //className identifies a pre existing class
-		if(Data.NoteData[className].Notes.indexOf(noteName) != -1){ //noteName identifies an existing note
-			var noteArrayLabels = Data.NoteData["Web-Development"].Notes.map(function(a) {return a.title;});
-			var indexToRemove = noteArrayLabels.indexOf(noteName);
-
-			Data.NoteData.splice(indexToRemove, 1);
+	if(className && noteName){ //if class name and note name is provided
+			//update class liste
+			var classLoc = ClassList.indexOf(className);
+			for(var i = 0; i < Data[classLoc].Notes.length; i++){
+				if(Data[classLoc].Notes[i].title == noteName){
+					Data[classLoc].Notes.splice(i, 1);
+				}
+			}
 
 			//update "Server"
 			fs.writeFile(
@@ -199,13 +201,9 @@ app.post('/:class/deleteNote', function(req, res, next){
 	        }
 	      }
 			);
-		}
-		else{
-			res.status(400).send('Request is for a note that does not exist. Delete did not occur');
-		}
 	}
 	else{
-		next();
+		res.status(400).send('Request is for a note that does not exist. Delete did not occur');
 	}
 })
 
@@ -232,8 +230,41 @@ app.get('/:class/:note', function(req, res, next){
 })
 
 //post request to update a pre existing Note
-app.post(':class/:note/editNote', function(req, res, next){
+app.post('/editNote', function(req, res, next){
+	var className = req.body.class; //get name of class page requested
+	var noteName = req.body.note; //get name of note requested
+	var newContent = req.body.content;
 
+	if(newContent){
+		if(ClassList.indexOf(className) != -1){ //check for invalid class
+			classLOC = ClassList.indexOf(ClassName);
+
+			for(var i = 0; i < Data[classLOC].Notes.length; i++){
+				if(Data[classLOC].Notes[i].title == noteName){
+					Data[classLOC].Notes[i].content = newContent;
+				}
+			}
+
+			//update "Server"
+			fs.writeFile(
+				__dirname + '/Data.json',
+				JSON.stringify(Data),
+				function (err) {
+	        if (!err) {
+	          res.status(200).send();
+	        } else {
+	          res.status(500).send("Failed to write data on server side.");
+	        }
+	      }
+			);
+		}
+		else{
+			res.status(400).send('Request is for a note that does not exist. Delete did not occur');
+		}
+	}
+	else {
+		next();
+	}
 })
 
 //404 errors

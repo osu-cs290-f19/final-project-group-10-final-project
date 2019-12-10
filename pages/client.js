@@ -6,11 +6,7 @@ for (var i = 0; i < noteCategories.length; i++) {
 function handleNoteContainerHeaderClick(event){
 	var actionButton = event.currentTarget;
 	var clickedElem = event.target;
-<<<<<<< HEAD
 	var classContainer = clickedElem.parentNode.parentNode.parentNode;
-=======
-	var classContainer = clickedElem.parentNode.parentNode;
->>>>>>> 02412291df1db5adaece3c882941c982dc0bf93b
 	var parentChildren = classContainer.children;
 
 	var noteContainerContent = [];
@@ -28,7 +24,6 @@ function handleNoteContainerHeaderClick(event){
 			noteContainerContent[0].style.display = "none";
 			noteContainerContent[1].style.display = "none"
 		}
-
 		//var currentStateOfChildren = noteContainerContent[0].style.display;
 		//var stateToSetChildren = "none";
 		//if(currentStateOfChildren == "none"){
@@ -100,7 +95,7 @@ function handleNewNoteOKButtonClick(event){
 	}
 	else{
 		var postRequest = new XMLHttpRequest();
-		var requestURL = '/' + newNoteClass + '/addNote';
+		var requestURL = '/addNote';
 		postRequest.open('POST', requestURL);
 
 		var requestBody = JSON.stringify({
@@ -140,11 +135,18 @@ function handleNewNoteOKButtonClick(event){
 					noteLink.setAttribute('href', link);
 					noteLink.textContent = newNoteTitle;
 
+					var button = document.createElement('button');
+					button.classList.add("delete-note-button");
+					button.textContent = 'X';
+
 					newNote.appendChild(noteLink);
 					putNewNoteHere.appendChild(newNote);
+					putNewNoteHere.appendChild(button);
 
 					document.getElementById("new-note-modal").style.display = "none";
 					document.getElementById("new-note-title-input").value = "";
+
+					location.reload();
 					/*
 					var noteTemplate = Handlebars.templates.NoteTemplate;
 					var newNoteHTML = noteTemplate({
@@ -239,7 +241,10 @@ function handleNewClassOKButtonClick(event){
 					ClassName: newClassTitle,
 					NoteList: []
 				});
-				document.body.insertAdjacentHTML('beforeend', newClassHTML);
+				document.getElementById("Homepage-Class-Container").insertAdjacentHTML('beforeend', newClassHTML);
+				var newClassEventListener = document.getElementById("Homepage-Class-Container");
+				newClassEventListener.addEventListener('click', handleNoteContainerHeaderClick);
+				location.reload(); //reloads the page
 			}
 		})
 		postRequest.send(requestBody);
@@ -250,7 +255,9 @@ function handleNewClassOKButtonClick(event){
 }
 
 
-//Code to delete a Note
+//Code to delete a Class
+
+
 
 //add event listeners to delete-class buttons
 var deleteClassButtonListeners = document.getElementsByClassName("delete-class");
@@ -262,6 +269,124 @@ for(var i = 0; i < deleteClassButtonListeners.length; i++){
 function handleDeleteClassButtonClick(event){
 	var actionButton = event.currentTarget;
 	var clickedElem = event.target;
+	var classContainer = clickedElem.parentNode.parentNode;
+	var classContainerItems = classContainer.children;
 
-	var classContainer = clickedElem.parentNode;
+	var nameOfClass = classContainer.getAttribute('data-classname');
+
+	var postRequest = new XMLHttpRequest();
+	var requestURL = '/deleteClass';
+	postRequest.open('POST', requestURL);
+
+	var requestBody = JSON.stringify({
+	  class : nameOfClass
+	});
+
+	postRequest.setRequestHeader('Content-Type', 'application/json');
+
+	postRequest.addEventListener('load', function(event){
+	  if (event.target.status !== 200) {
+	  	var responseBody = event.target.response;
+	  	alert("Error deleting class on server side: " + responseBody);
+	  } else {
+	    //client side code to delete class
+			for(var i=0;i<classContainerItems.length;i++){
+				classContainer.removeChild(classContainerItems[i]);
+			}
+	  }
+	})
+	postRequest.send(requestBody);
+}
+
+//Code to delete a Note
+
+//add event listeners to delete-note buttons
+var deleteNoteButtonListeners = document.getElementsByClassName("delete-note-button");
+for(var i = 0; i < deleteNoteButtonListeners.length; i++){
+	deleteNoteButtonListeners[i].addEventListener('click', handleDeleteNoteButtonClick);
+}
+
+
+
+// function to delete a given note from the website
+function handleDeleteNoteButtonClick(event){
+	var actionButton = event.currentTarget;
+	var clickedElem = event.target;
+	var noteItem = clickedElem.parentNode;
+	var noteContainer = clickedElem.parentNode.parentNode;
+	var noteContainerItems = noteContainer.children;
+
+	var noteName = noteItem.getAttribute("data-notename");
+	var className = noteItem.getAttribute("data-classname");
+
+	var postRequest = new XMLHttpRequest();
+	var requestURL = '/deleteNote';
+	postRequest.open('POST', requestURL);
+
+	var requestBody = JSON.stringify({
+	  class : className,
+	  title : noteName
+	});
+
+	postRequest.setRequestHeader('Content-Type', 'application/json');
+
+	postRequest.addEventListener('load', function(event){
+	  if (event.target.status !== 200) {
+	    var responseBody = event.target.response;
+	    alert("Error deleting note on server side: " + responseBody);
+	  } else {
+	    //client side code to add new note
+			for(var i=0;i<noteContainerItems.length;i++){
+				if(noteContainerItems[i] == noteItem){
+					noteContainer.removeChild(noteContainerItems[i]);
+				}
+			}
+	  }
+	})
+	postRequest.send(requestBody);
+	location.reload();
+}
+
+
+//functions to save changes made to notes on note page
+var noteContentTextArea = document.getElementById("Note-Contents");
+var noteContentSaveButton = document.getElementById("save");
+
+try {
+	noteContentTextArea.addEventListener('change', saveNoteContents);
+	noteContentSaveButton.addEventListener('click', saveNoteContents);
+}
+catch(error){
+	console.log('Error: ', error ,'\n', 'Error occurred because the page does not contain these elements.')
+}
+
+function saveNoteContents(event){
+	var newNoteContent = document.getElementById("Note-Contents").value;
+	var classOfNote = document.getElementById("Note-Contents").getAttribute("data-classname");
+	var nameOfNote = document.getElementById("Note-Contents").getAttribute("data-notetitle");
+
+	console.log(nameOfNote);
+	console.log(newNoteContent);
+
+	var postRequest = new XMLHttpRequest();
+	var requestURL = '/editNote';
+	postRequest.open('POST', requestURL);
+
+	var requestBody = JSON.stringify({
+		class : classOfNote,
+		note : nameOfNote,
+		content : newNoteContent
+	});
+
+	postRequest.setRequestHeader('Content-Type', 'application/json');
+
+	postRequest.addEventListener('load', function(event){
+	  if (event.target.status !== 200) {
+	    var responseBody = event.target.response;
+	    alert("Error Saving note on server side: " + responseBody);
+	  } else {
+	    console.log('Save Successful.');
+	  }
+	})
+	postRequest.send(requestBody);
 }

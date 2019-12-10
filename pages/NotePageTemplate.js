@@ -9,7 +9,11 @@ templates['NotePageTemplate'] = template({"compiler":[8,">= 4.3.0"],"main":funct
     + alias4(((helper = (helper = helpers.classname || (depth0 != null ? depth0.classname : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"classname","hash":{},"data":data,"loc":{"start":{"line":4,"column":24},"end":{"line":4,"column":37}}}) : helper)))
     + "\n    <div class=\"title\"><h2>"
     + alias4(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data,"loc":{"start":{"line":5,"column":27},"end":{"line":5,"column":36}}}) : helper)))
-    + "</h2></div>\n</div>\n\n\n<div class=\"content\">\n  <textarea>\n    "
+    + "</h2></div>\n</div>\n\n\n<div class=\"Content-Container\">\n  <textarea id=\"Note-Contents\" data-notetitle=\""
+    + alias4(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data,"loc":{"start":{"line":10,"column":47},"end":{"line":10,"column":56}}}) : helper)))
+    + "\" data-classname=\""
+    + alias4(((helper = (helper = helpers.classname || (depth0 != null ? depth0.classname : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"classname","hash":{},"data":data,"loc":{"start":{"line":10,"column":74},"end":{"line":10,"column":87}}}) : helper)))
+    + "\">\n    "
     + alias4(((helper = (helper = helpers.content || (depth0 != null ? depth0.content : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"content","hash":{},"data":data,"loc":{"start":{"line":11,"column":4},"end":{"line":11,"column":15}}}) : helper)))
     + "\n  </textarea>\n\n  <div class=\"Note-Save-Button\">\n    <button class=\"save\">save</button>\n  </div>\n\n</div>\n";
 },"useData":true});
