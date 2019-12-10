@@ -1,4 +1,18 @@
-/* Displays a single Note */
 
 
-{{> NoteTemplate}}
+<div class="date-title"><h1>Date CreatedL<br />{{created}}</h1></div>
+<div class="site-title">{{classname}}
+    <div class="title"><h2>{{title}}</h2></div>
+</div>
+
+
+<div class="content">
+  <textarea>
+    {{content}}
+  </textarea>
+
+  <div class="Note-Save-Button">
+    <button class="save">save</button>
+  </div>
+
+</div>

@@ -1,7 +1,14 @@
 <main>
+
   <div>
     {{#each ClassList}}
       {{> ClassTemplate}}
-      {{/each}}
+    {{/each}}
   </div>
+
+  {{> AddNoteModal}}
+
+  {{> AddClassButtonTemplate}}
+  {{> AddClassModal}}
+
 </main>

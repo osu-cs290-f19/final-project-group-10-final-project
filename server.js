@@ -7,13 +7,21 @@ Description: server implementation using express.js for Oregon State CS 290 Fina
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const hbs = require('handlebars');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 3000;
 
+
 //use handlebars as templating engine
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+app.engine('handlebars', exphbs({
+	defaultLayout: 'main',
+	partialsDir  : [
+        //  path to your partials
+        path.join(__dirname, 'views/partials'),
+    ]
+}));
 app.set('view engine', 'handlebars');
 
 //use JSON Parser
@@ -26,7 +34,7 @@ app.use(express.static('pages'));
 var Data = require("./Data.json");
 console.log(Data);
 //keep list of class names
-var ClassList = ['Web-Development', 'Diffrential-Calculus'];
+var ClassList = ['Web-Development', 'Differential-Calculus'];
 console.log(ClassList);
 
 //logger function
@@ -62,7 +70,10 @@ app.post('/addClass', function(req, res, next){
 		//Add new class to ClassList
 		ClassList.push(className);
 		//Create new note section in Data.NoteData
-		Data.className = {"Notes" : []};
+		Data.push({
+			"ClassName" : className,
+			"Notes" : []
+		});
 
 		//update "Server"
 		fs.writeFile(
@@ -113,10 +124,14 @@ app.post('/deleteClass', function(req, res, next){
 app.get('/:class', function(req, res, next){
 	var className = req.params.class; //get name of class page requested
 	if(ClassList.indexOf(className) != -1){ //class is valid
+
+		var itemIndex = ClassList.indexOf(className); //get index of item in ClassList
+		var obj = Data[itemIndex]; //store the actual object
+
 		res.status(200).render('ClassPageTemplate', {
 			//will need to link data in ClassPageTemplate to Data.NoteData[className].Notes
-			ClassName : className,
-			NoteList : Data.className.Notes
+			ClassName : obj.ClassName,
+			NoteList : obj.Notes
 		});
 	}
 	else{
@@ -129,10 +144,31 @@ app.post('/:class/addNote', function(req, res, next){
 	var className = req.params.class; //get name of the class
 	var noteName = req.body.title; //get note
 
-	if(className){ //if class name is provided
-		if(ClassList.indexOf(className) != 1){ //className identifies a pre existing class
+	if(className && noteName){ //if class name and note name is provided
+			//update class liste
+			ClassList.push(className);
+			var itemIndex = ClassList.indexOf(className);
 
-		}
+			//update Data
+			Data[itemIndex].Notes.push({
+					"title" : noteName,
+					"classname" : className,
+					"created" : new Date().toJSON().slice(0,10).split('-').reverse().join('/'),
+					"content" : ""
+			})
+
+			//update "Server"
+			fs.writeFile(
+				__dirname + '/Data.json',
+				JSON.stringify(Data),
+				function (err) {
+	        if (!err) {
+	          res.status(200).send();
+	        } else {
+	          res.status(500).send("Failed to write data on server side.");
+	        }
+	      }
+			);
 	}
 	else{
 		res.status(400).send('Request is for a note that does not exist. Delete did not occur');
@@ -178,18 +214,17 @@ app.post('/:class/deleteNote', function(req, res, next){
 app.get('/:class/:note', function(req, res, next){
 	var className = req.params.class; //get name of class page requested
 	var noteName = req.params.note; //get name of note requested
-	console.log(className, " : ", noteName);
 
 	if(ClassList.indexOf(className) != -1){ //class is valid
-		var classNotes = Data.NoteData[className].Notes; //get the notes for that class
+		var classIndex = ClassList.indexOf(className);
+		var classNotes = Data[classIndex].Notes; //get the notes for that class
 		for(var i = 0; i < classNotes.length; i++){ //iterate through the notes for the class
 			if(classNotes[i].title === noteName){ //check if note names match
 				res.status(200).render('NotePageTemplate', classNotes[i]);
-			}
-			else if(i === classNotes.length-1){ //if note found in notes list send 404
-				res.status(404).render('404');
+				return
 			}
 		}
+		next();
 	}
 	else{
 		res.status(404).render('404');

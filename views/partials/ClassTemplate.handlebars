@@ -1,14 +1,17 @@
 
 <div class="class-container" data-classname="{{ClassName}}">
   <div class="class-container-header">
-    <button id="dropdown" onclick="window.location.href = 'http://localhost:3000/{{ClassName}}';"> {{ClassName}} </button>
+    <button class="dropdown"><h1> {{ClassName}} </a></h1>  </button>
+    <button class="delete-class"> X </button>
   </div>
-  <div class="Note-Container">
+
+    <ul class="Note-Container" style="display:none;">
       {{#each Notes}}
-        {{> NoteTemplate}}
+          <li class="Note-List-Item" data-notename={{title}}>
+            <a href="http://localhost:3000/{{classname}}/{{title}}">{{title}}</a>
+          </li>
       {{/each}}
-  </div>
-  <div class="new-note-button">
-    <button id="new-note"></button>
-  </div>
+    </ul>
+
+  {{> AddNoteButtonTemplate}}
 </div>

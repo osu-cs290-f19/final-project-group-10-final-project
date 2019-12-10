@@ -3,27 +3,33 @@
   <head>
     <meta charset="utf-8">
     <title>Site Title</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
 
     <!-- This 3rd-party stylesheet makes available the font families to be used for this page ("Roboto" and "Roboto Slab"). -->
     <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab:100" rel="stylesheet">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.4.2/handlebars.runtime.js" charset="utf-8" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.4.2/handlebars.runtime.js" charset="utf-8"></script>
 
     <script src="/NoteTemplate.js" charset="utf-8" defer></script>
     <script src="/ClassTemplate.js" charset="utf-8" defer></script>
+    <script src="/AddNoteButtonTemplate.js" charset="utf-8" defer></script>
+    <script src="/AddClassButtonTemplate.js" charset="utf-8" defer></script>
+
     <script src="/client.js" charset="utf-8" charset="utf-8" defer></script>
 
 
   </head>
 
   <body>
+
     <header>
         <h1 class="site-title"><a href="#">Site Title</a></h1>
     </header>
+    <main class="content">
 
-    {{{body}}}
+          {{{body}}}
 
+    </main>
 
   </body>
 </html>

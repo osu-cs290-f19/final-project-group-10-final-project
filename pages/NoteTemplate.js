@@ -10,13 +10,13 @@ templates['NoteTemplate'] = template({"compiler":[8,">= 4.3.0"],"main":function(
     + " data-created=\""
     + alias4(((helper = (helper = helpers.created || (depth0 != null ? depth0.created : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"created","hash":{},"data":data,"loc":{"start":{"line":2,"column":84},"end":{"line":2,"column":95}}}) : helper)))
     + "\">\n  <div class=\"Note-Title-Container\">\n    <h3><a href=\"http://localhost:3000/"
-    + alias4(((helper = (helper = helpers["class"] || (depth0 != null ? depth0["class"] : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"class","hash":{},"data":data,"loc":{"start":{"line":4,"column":39},"end":{"line":4,"column":48}}}) : helper)))
+    + alias4(((helper = (helper = helpers.classname || (depth0 != null ? depth0.classname : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"classname","hash":{},"data":data,"loc":{"start":{"line":4,"column":39},"end":{"line":4,"column":52}}}) : helper)))
     + "/"
-    + alias4(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data,"loc":{"start":{"line":4,"column":49},"end":{"line":4,"column":58}}}) : helper)))
+    + alias4(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data,"loc":{"start":{"line":4,"column":53},"end":{"line":4,"column":62}}}) : helper)))
     + "\">"
-    + alias4(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data,"loc":{"start":{"line":4,"column":60},"end":{"line":4,"column":69}}}) : helper)))
-    + "</a></h3>\n  </div>\n  <div class=\"Note-Content-Container\">\n    <section class=\"Note-Content\">\n        "
-    + alias4(((helper = (helper = helpers.content || (depth0 != null ? depth0.content : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"content","hash":{},"data":data,"loc":{"start":{"line":8,"column":8},"end":{"line":8,"column":19}}}) : helper)))
+    + alias4(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data,"loc":{"start":{"line":4,"column":64},"end":{"line":4,"column":73}}}) : helper)))
+    + "</a></h3>\n    <button class=\"delete-note\"> X </button>\n  </div>\n  <div class=\"Note-Content-Container\">\n    <section class=\"Note-Content\">\n        "
+    + alias4(((helper = (helper = helpers.content || (depth0 != null ? depth0.content : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"content","hash":{},"data":data,"loc":{"start":{"line":9,"column":8},"end":{"line":9,"column":19}}}) : helper)))
     + "\n    </section>\n  </div>\n</div>\n";
 },"useData":true});
 })();

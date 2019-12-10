@@ -39,29 +39,6 @@ p {
   font-size: 20px;
 }
 
-.class-folder {
-  background-color: #2B7A78;
-  color: white;
-  width: auto;
-  margin: 20px;
-  padding: 10px;
-}
-
-.note {
-  background-color: #3AAFA9;
-  color: white;
-  width: auto;
-  margin: 20px;
-  margin-left: 70px;
-  padding: 10px;
-}
-
-.note-info {
-  text-align: right;
-  margin-top: 10px;
-  margin-right: -85px;
-  float: right;
-}
 .button {
   background-color: gray;
   border-color: black;
@@ -91,7 +68,7 @@ p {
   text-align: center;
 }
 
-.modal {
+#new-note-modal {
   display: none;
   position: fixed;
   z-index: 1;
@@ -102,6 +79,39 @@ p {
   overflow: auto;
   background-color: rgba(0,0,0,0.4);
 }
+
+#new-class-modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+/*
+.Note-Container {
+  display: none;
+}
+
+.new-note-button {
+  display: none;
+}
+*/
+/*
+.modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+*/
 
 .modal-content {
   background-color: white;
