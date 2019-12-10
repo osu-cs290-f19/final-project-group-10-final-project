@@ -181,29 +181,31 @@ app.post('/deleteNote', function(req, res, next){
 	var noteName = req.body.title; //get note
 
 	if(className && noteName){ //if class name and note name is provided
-			//update class liste
-			var classLoc = ClassList.indexOf(className);
-			for(var i = 0; i < Data[classLoc].Notes.length; i++){
-				if(Data[classLoc].Notes[i].title == noteName){
-					Data[classLoc].Notes.splice(i, 1);
-				}
+		//update class liste
+		var classLoc = ClassList.indexOf(className);
+		for(var i = 0; i < Data[classLoc].Notes.length; i++){
+			if(Data[classLoc].Notes[i].title == noteName){
+				Data[classLoc].Notes.splice(i, 1);
 			}
+		}
 
-			//update "Server"
-			fs.writeFile(
-				__dirname + '/Data.json',
-				JSON.stringify(Data),
-				function (err) {
-	        if (!err) {
-	          res.status(200).send();
-	        } else {
-	          res.status(500).send("Failed to write data on server side.");
-	        }
-	      }
-			);
+		//update "Server"
+		fs.writeFile(
+			__dirname + '/Data.json',
+			JSON.stringify(Data),
+			function (err) {
+	       if (!err) {
+					 console.log(err);
+	         res.status(200).send();
+	       } else {
+					 console.log(err);
+	         res.status(500).send("Failed to write data on server side.");
+        }
+	    }
+		);
 	}
 	else{
-		res.status(400).send('Request is for a note that does not exist. Delete did not occur');
+		res.status(400).send('Trying to Delete file that does not exist. Delete did not occur');
 	}
 })
 
