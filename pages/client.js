@@ -343,7 +343,6 @@ function handleDeleteNoteButtonClick(event){
 	  }
 	})
 	postRequest.send(requestBody);
-	location.reload();
 }
 
 

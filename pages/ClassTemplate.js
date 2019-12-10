@@ -21,7 +21,7 @@ templates['ClassTemplate'] = template({"1":function(container,depth0,helpers,par
     + alias4(((helper = (helper = helpers.ClassName || (depth0 != null ? depth0.ClassName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"ClassName","hash":{},"data":data,"loc":{"start":{"line":2,"column":45},"end":{"line":2,"column":58}}}) : helper)))
     + "\">\n  <div class=\"class-container-header\">\n    <button class=\"dropdown\"><h1> "
     + alias4(((helper = (helper = helpers.ClassName || (depth0 != null ? depth0.ClassName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"ClassName","hash":{},"data":data,"loc":{"start":{"line":4,"column":34},"end":{"line":4,"column":47}}}) : helper)))
-    + "</h1> <i style='font-size:33px' class='fas'>&#xf103;</i></button>\n    <button class=\"delete-class\"> X </button>\n  </div>\n\n    <ul class=\"Note-Container\" style=\"display:none;\">\n"
+    + "</h1> <i style='font-size:33px' class='fas'>&#xf103;</i></button>\n    <button class=\"delete-class\">X</button>\n  </div>\n\n    <ul class=\"Note-Container\" style=\"display:none;\">\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.Notes : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":9,"column":6},"end":{"line":14,"column":15}}})) != null ? stack1 : "")
     + "    </ul>\n\n  <button class=\"new-note-button\" style=\"display:none;\"><h3>Add Note</h3></button>\n</div>\n";
 },"useData":true});

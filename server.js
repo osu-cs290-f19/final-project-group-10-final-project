@@ -100,10 +100,23 @@ app.post('/deleteClass', function(req, res, next){
 	var className = req.body.class; //get name of the class
 
 	if(className){ //valid data sent from client
-		if(ClassList.indexOf(className)){ //in ClassList
+		if(ClassList.indexOf(className) != -1){ //in ClassList
 			var index = ClassList.indexOf(className);
 			ClassList.splice(index);
 			Data.splice(index);
+
+			//update "Server"
+			fs.writeFile(
+				__dirname + '/Data.json',
+				JSON.stringify(Data),
+				function (err) {
+	        if (!err) {
+	          res.status(200).send();
+	        } else {
+	          res.status(500).send("Failed to write data on server side.");
+	        }
+	      }
+			);
 		}
 		else{
 			res.status(400).send('Class you are trying to delete does not exist.')
@@ -201,28 +214,27 @@ app.post('/deleteNote', function(req, res, next){
 	var className = req.body.class; //get name of the class
 	var noteName = req.body.title; //get note
 
-	if(className && noteName){ //if class name and note name is provided
-		//update class liste
+	if(ClassList.indexOf(className) != -1){ //if class name and note name is provided
+		//update class list
 		var classLoc = ClassList.indexOf(className);
-		for(var i = 0; i < Data[classLoc].Notes.length; i++){
-			if(Data[classLoc].Notes[i].title == noteName){
-				Data[classLoc].Notes.splice(i, 1);
-			}
-		}
+		var noteList = Data[classLoc].Notes.map(function(a){return a.title});
+		var noteToRemove = noteList.indexOf(noteName);
+
+		Data[classLoc].Notes.splice(noteToRemove);
 
 		//update "Server"
 		fs.writeFile(
 			__dirname + '/Data.json',
 			JSON.stringify(Data),
 			function (err) {
-	       if (!err) {
+				 if (!err) {
 					 console.log(err);
-	         res.status(200).send();
-	       } else {
+					 res.status(200).send();
+				 } else {
 					 console.log(err);
-	         res.status(500).send("Failed to write data on server side.");
-        }
-	    }
+					 res.status(500).send("Failed to write data on server side.");
+				}
+			}
 		);
 	}
 	else{

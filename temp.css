@@ -35,10 +35,10 @@ li {
 }
 
 .class-container {
+  border : 2px solid black;
   color : white;
   width : auto;
   margin : 20px;
-  padding : 10px;
 }
 
 .class-container-header {
@@ -64,6 +64,15 @@ li {
   height : 90px;
   width: 20px;
   align-items: center;
+}
+
+.delete-class:hover {
+  background-color: white;
+  border-color: black;
+  height : 90px;
+  width: 20px;
+  align-items: center;
+  color:darkred;
 }
 
 #new-class-button {
@@ -111,6 +120,18 @@ li {
   padding : 10px;
 }
 
+.delete-note-button {
+  overflow: hidden;
+  float: right;
+}
+
+.delete-note-button:hover {
+  overflow: hidden;
+  float: right;
+  color:darkred;
+}
+
+
 .Note-Container a {
 padding: 6px 0 6px 0;
 text-decoration: none;
@@ -125,16 +146,8 @@ display: block;
   text-align: center;
   height: 50px;
   border : 2px solid black;
-  border-radius: 25px;
-  background-color : #3AAFA9;
-}
-
-.title {
-  font-family: "Arial";
-  color: white;
-  font-size: 80px;
-  font-weight: 100;
-  margin: 0 auto;
+  border-radius: 20px;
+  background-color : grey;
 }
 
 .site-title {
@@ -185,49 +198,6 @@ p {
   height : 20px;
   width: 50px;
   align-items: center;
-}
-
-/*Note Page Template*/
-.date-title {
-font-family: "Arial";
-color: #fff;
-text-align: right;
-float: left;
-margin-left: 50px;
-}
-
-.Content-Container {
-  background: white;
-  height: 80%;
-  width: 100%;
-  border: 2px solid black;
-  border-radius: 25px
-  display: inline-block;
-}
-
-.notepage-header {
-  background: lightgrey;
-}
-
-#Note-Contents {
-height: 90%;
-width: 80%;
-box-sizing: border-box;
-font-size: 28px;
-border: 4px solid black;
-}
-
-.save {
-  background-color: white;
-  border: 2px solid black;
-  border-radius: 25px;
-  height : 30px;
-  width: 60px;
-  text-align: center;
-}
-
-.Note-Save-Button {
-  margin: 20px;
 }
 
 #add-note {
@@ -283,11 +253,6 @@ margin: 10% auto;
 padding: 20px;
 width: 40%;
 height: 30%;
-}
-
-.modal button {
-  padding: 40 px;
-  margin: 40 px;
 }
 
 label {
@@ -367,13 +332,15 @@ color: white;
 textarea {
 margin: 20px;
 padding: 10px;
-height: 90%;
-width: 85%;
-text-align: center;
+float: left;
 }
 
-.Note-Save-Button {
-align-items: center;
+.date-title {
+font-family: "Arial";
+color: #fff;
+text-align: right;
+float: left;
+margin-left: 50px;
 }
 
 .title {
