@@ -178,6 +178,31 @@ p {
   align-items: center;
 }
 
+/*Note Page Template*/
+.date-title {
+font-family: "Arial";
+color: #fff;
+text-align: right;
+float: left;
+margin-left: 50px;
+}
+
+.Content-Container {
+  
+}
+
+#Note-Contents {
+
+}
+
+.Note-Save-Button {
+  background-color: gray;
+  border-color: black;
+  height : 20px;
+  width: 50px;
+  align-items: center;
+}
+
 #add-note {
   background-color: #17252A;
   color: white;
@@ -313,13 +338,6 @@ padding: 10px;
 float: left;
 }
 
-.date-title {
-font-family: "Arial";
-color: #fff;
-text-align: right;
-float: left;
-margin-left: 50px;
-}
 
 .title {
 font-family: "Arial";
