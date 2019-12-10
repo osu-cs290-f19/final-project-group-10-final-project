@@ -239,7 +239,7 @@ app.post('/editNote', function(req, res, next){
 
 	if(newContent){
 		if(ClassList.indexOf(className) != -1){ //check for invalid class
-			classLOC = ClassList.indexOf(ClassName);
+			classLOC = ClassList.indexOf(className);
 
 			for(var i = 0; i < Data[classLOC].Notes.length; i++){
 				if(Data[classLOC].Notes[i].title == noteName){
@@ -265,6 +265,7 @@ app.post('/editNote', function(req, res, next){
 		}
 	}
 	else {
+		console.log('New Note Content not provided.')
 		next();
 	}
 })
