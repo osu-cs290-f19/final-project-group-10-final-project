@@ -6,7 +6,11 @@ for (var i = 0; i < noteCategories.length; i++) {
 function handleNoteContainerHeaderClick(event){
 	var actionButton = event.currentTarget;
 	var clickedElem = event.target;
+<<<<<<< HEAD
 	var classContainer = clickedElem.parentNode.parentNode.parentNode;
+=======
+	var classContainer = clickedElem.parentNode.parentNode;
+>>>>>>> 02412291df1db5adaece3c882941c982dc0bf93b
 	var parentChildren = classContainer.children;
 
 	var noteContainerContent = [];
