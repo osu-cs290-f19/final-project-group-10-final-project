@@ -6,11 +6,8 @@ for (var i = 0; i < noteCategories.length; i++) {
 function handleNoteContainerHeaderClick(event){
 	var actionButton = event.currentTarget;
 	var clickedElem = event.target;
-<<<<<<< HEAD
 	var classContainer = clickedElem.parentNode.parentNode.parentNode;
-=======
 	var classContainer = clickedElem.parentNode.parentNode;
->>>>>>> 02412291df1db5adaece3c882941c982dc0bf93b
 	var parentChildren = classContainer.children;
 
 	var noteContainerContent = [];
@@ -250,7 +247,7 @@ function handleNewClassOKButtonClick(event){
 }
 
 
-//Code to delete a Note
+//Code to delete a Class
 
 //add event listeners to delete-class buttons
 var deleteClassButtonListeners = document.getElementsByClassName("delete-class");
@@ -262,6 +259,9 @@ for(var i = 0; i < deleteClassButtonListeners.length; i++){
 function handleDeleteClassButtonClick(event){
 	var actionButton = event.currentTarget;
 	var clickedElem = event.target;
-
-	var classContainer = clickedElem.parentNode;
+	var classContainer = clickedElem.parentNode.parentNode;
+	var classContainerItems = classContainer.children;
+	for(var i=0;i<classContainerItems.length;i++){
+		classContainer.removeChild(classContainerItems[i]);
+	}
 }
