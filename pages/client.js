@@ -265,3 +265,26 @@ function handleDeleteClassButtonClick(event){
 		classContainer.removeChild(classContainerItems[i]);
 	}
 }
+
+
+//Code to delete a Note
+
+//add event listeners to delete-note buttons
+var deleteNoteButtonListeners = document.getElementsByNoteName("delete-note-button");
+for(var i = 0; i < deleteNoteButtonListeners.length; i++){
+	deleteNoteButtonListeners[i].addEventListener('click', handleDeleteNoteButtonClick);
+}
+
+// function to delete a given note from the website
+function handleDeleteNoteButtonClick(event){
+	var actionButton = event.currentTarget;
+	var clickedElem = event.target;
+	var noteItem = clickedElem.parentNode;
+	var noteContainer = clickedElem.parentNode.parentNode;
+	var noteContainerItems = noteContainer.children;
+	for(var i=0;i<noteContainerItems.length;i++){
+		if(noteContainerItems[i] == noteItem){
+			noteContainer.removeChild(noteContainerItems[i]);
+		}
+	}
+}
