@@ -7,10 +7,6 @@ function handleNoteContainerHeaderClick(event){
 	var actionButton = event.currentTarget;
 	var clickedElem = event.target;
 	var classContainer = clickedElem.parentNode.parentNode.parentNode;
-<<<<<<< HEAD
-=======
-	var classContainer = clickedElem.parentNode.parentNode;
->>>>>>> 5316c8a5d8a454ee5a331c0549f08c9356bc13be
 	var parentChildren = classContainer.children;
 
 	var noteContainerContent = [];
@@ -260,12 +256,6 @@ function handleNewClassOKButtonClick(event){
 
 
 //Code to delete a Class
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 5316c8a5d8a454ee5a331c0549f08c9356bc13be
-
 //add event listeners to delete-class buttons
 var deleteClassButtonListeners = document.getElementsByClassName("delete-class");
 for(var i = 0; i < deleteClassButtonListeners.length; i++){
@@ -278,7 +268,6 @@ function handleDeleteClassButtonClick(event){
 	var clickedElem = event.target;
 	var classContainer = clickedElem.parentNode.parentNode;
 	var classContainerItems = classContainer.children;
-<<<<<<< HEAD
 
 	var nameOfClass = classContainer.getAttribute('data-classname');
 
@@ -397,10 +386,6 @@ function saveNoteContents(event){
 	  }
 	})
 	postRequest.send(requestBody);
-=======
-	for(var i=0;i<classContainerItems.length;i++){
-		classContainer.removeChild(classContainerItems[i]);
-	}
 }
 
 
@@ -424,5 +409,4 @@ function handleDeleteNoteButtonClick(event){
 			noteContainer.removeChild(noteContainerItems[i]);
 		}
 	}
->>>>>>> 5316c8a5d8a454ee5a331c0549f08c9356bc13be
 }
